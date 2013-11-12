@@ -111,7 +111,7 @@ class GraphvizPreprocessor(markdown.preprocessors.Preprocessor):
                              self.graphviz.config["FORMAT"])
         p = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True)
         #(child_stdin, child_stdout) = (p.stdin, p.stdout) 
-        p.stdin.write("\n".join(lines))
+        p.stdin.write(u"\n".join(lines).encode('utf-8').strip())
         p.stdin.close()
         p.wait()
         filepath = "%s%s.%s" % (self.graphviz.config["WRITE_IMGS_DIR"], n, self.graphviz.config["FORMAT"])
